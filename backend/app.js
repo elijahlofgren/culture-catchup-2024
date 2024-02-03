@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const mysql = require('mysql2');
 const movieRoutes = require('./routes/movieRoutes');
 const swaggerUi = require('swagger-ui-express');
@@ -20,6 +21,9 @@ db.connect((err) => {
 });
 
 const app = express();
+
+// Enable CORS for all requests
+app.use(cors());
 
 // Use the movieRoutes for the /movies endpoint, passing the DB connection
 app.use('/movies', movieRoutes(db));
