@@ -15,6 +15,7 @@
 5. **Most Downvotes**: List of movies with the highest downvotes.
 6. **Most Upvotes**: List of movies with the highest upvotes.
 7. **User Votes**: List of movies voted up or down by each user.
+8. **You most agree/disagree with these people**: show differences/sameness between voters.
 
 ## Useful Queries:
 
