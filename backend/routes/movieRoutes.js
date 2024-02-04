@@ -7,6 +7,7 @@ module.exports = (db) => {
         let sql = 'SELECT * FROM movies';
         db.query(sql, (err, results) => {
             if(err) {
+                console.log(err);
                 res.status(500).send('Error fetching movies from the database');
             } else {
                 res.send(results);
