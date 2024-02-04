@@ -1,3 +1,7 @@
+Watch party planning specific reports:
+
+* I want a watch party with these 3 people, what are the top upvoted movies among just these 3 people?
+
 Report/badge ideas:
 
 * Top movies (most upvotes after subtracting downvotes from upvotes)
