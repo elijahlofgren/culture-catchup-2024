@@ -22,7 +22,7 @@ function TopVoters() {
             {data.map((voter) => (
                 <div key={voter.id}>
                     <h2>{voter.first_name}</h2>
-                    <a>See Votes</a>
+                    <a href={`/votes/user-votes/${voter.id}`}>See Votes</a>
 
                 </div>
             ))}
