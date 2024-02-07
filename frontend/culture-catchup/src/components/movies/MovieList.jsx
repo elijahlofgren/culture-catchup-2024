@@ -6,7 +6,7 @@ function MovieList() {
 
     useEffect(() => {
         // The URL of the API you want to fetch from
-        const apiUrl = 'http://localhost:3000/movies';
+        const apiUrl = `${import.meta.env.VITE_API_URL}/movies`;
 
         // Fetching data using Axios
         axios.get(apiUrl)

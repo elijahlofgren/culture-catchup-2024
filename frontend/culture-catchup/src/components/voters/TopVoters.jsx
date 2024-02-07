@@ -5,7 +5,7 @@ function TopVoters() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        const apiUrl = 'http://localhost:3000/voters/top-voters';
+        const apiUrl = `${import.meta.env.VITE_API_URL}/voters/top-voters`;
 
         axios.get(apiUrl)
             .then((response) => {
@@ -22,7 +22,7 @@ function TopVoters() {
             {data.map((voter) => (
                 <div key={voter.id}>
                     <h2>{voter.first_name}</h2>
-                    <a href={`/votes/user-votes/${voter.id}`}>See Votes</a>
+                    <a href={`/ votes / user - votes / ${voter.id}`}>See Votes</a>
 
                 </div>
             ))}

@@ -8,7 +8,7 @@ function UserVotes() {
 
     useEffect(() => {
         // The URL of the API you want to fetch from
-        const apiUrl = `http://localhost:3000/votes/by-user?user_id=${userId}`;
+        const apiUrl = `${import.meta.env.VITE_API_URL}/votes/by-user?user_id=${userId}`;
 
         // Fetching data using Axios
         axios.get(apiUrl)
