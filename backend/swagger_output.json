@@ -24,7 +24,7 @@
         }
       }
     },
-    "/voters/": {
+    "/voters/top-voters": {
       "get": {
         "description": "",
         "responses": {

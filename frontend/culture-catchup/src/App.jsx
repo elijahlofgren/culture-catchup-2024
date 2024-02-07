@@ -1,11 +1,13 @@
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import MovieList from './components/movies/MovieList'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import routes from "./routes";
 
 function App() {
   return (
-    <>
+    <Router>
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -15,10 +17,24 @@ function App() {
         </a>
       </div>
       <h1>Culture Catch Up</h1>
-      <div className="card">
-       <MovieList />
-       </div>
-    </>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/movies">Movies</Link>
+          </li>
+          <li>
+            <Link to="/top-voters">Top Voters</Link>
+          </li>
+          {/* Add more links here if needed */}
+        </ul>
+      </nav>
+      <Routes>
+        {routes.map((route, index) => (
+          <Route key={index} path={route.path} element={React.createElement(route.component)} />
+        ))}
+      </Routes>
+    </Router>
+
   )
 }
 
