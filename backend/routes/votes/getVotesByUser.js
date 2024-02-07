@@ -10,17 +10,18 @@ const schema = Joi.object({
 });
 
 module.exports = (db) => {
-    router.get('/by-user', async (req, res) => {
+  router.get('/by-user', async (req, res) => {
 
- // Validate request query parameters
- const { value: validatedQueryParams, error } = schema.validate(req.query);
- if (error) {
-    // If validation fails, return a 400 response with the error message
-    return res.status(400).send(error.details[0].message);
-  }
+    // Validate request query parameters
+    const { value: validatedQueryParams, error } = schema.validate(req.query);
+    if (error) {
+      // If validation fails, return a 400 response with the error message
+      return res.status(400).send(error.details[0].message);
+    }
 
-  try {
-        const query = `SELECT
+    try {
+      const query = `SELECT
+                m.id,
                 m.title,
                 v.up_vote,
                 v.down_vote,
@@ -31,15 +32,15 @@ module.exports = (db) => {
                 LEFT JOIN movies m ON v.movie_id = m.id
             WHERE
                 u.id = ?`;
-        const [rows] = await db.query(query, [validatedQueryParams.user_id]); // Pass parameters as an array
-        res.json(rows);
+      const [rows] = await db.query(query, [validatedQueryParams.user_id]); // Pass parameters as an array
+      res.json(rows);
 
     } catch (error) {
-        console.error('Error executing query:', error);
-        res.status(500).send('Internal Server Error');
-      }
-   
-    });
+      console.error('Error executing query:', error);
+      res.status(500).send('Internal Server Error');
+    }
 
-    return router;
+  });
+
+  return router;
 };

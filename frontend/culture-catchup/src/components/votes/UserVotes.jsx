@@ -4,28 +4,32 @@ import { useParams } from 'react-router-dom';
 import MovieCard from '../common/MovieCard';
 
 function UserVotes() {
+    const [voter, setVoter] = useState(null);
     const [data, setData] = useState([]);
     let { userId } = useParams();
 
     useEffect(() => {
-        // The URL of the API you want to fetch from
-        const apiUrl = `${import.meta.env.VITE_API_URL}/votes/by-user?user_id=${userId}`;
 
-        // Fetching data using Axios
-        axios.get(apiUrl)
+        axios.get(`${import.meta.env.VITE_API_URL}/voters/get-voter?user_id=${userId}`)
             .then((response) => {
-                // Handling the response data
+                setVoter(response.data);
+            })
+            .catch((error) => {
+                console.error("Error fetching voter: ", error);
+            });
+
+        axios.get(`${import.meta.env.VITE_API_URL}/votes/by-user?user_id=${userId}`)
+            .then((response) => {
                 setData(response.data);
             })
             .catch((error) => {
-                // Handling errors if any
-                console.error("Error fetching data: ", error);
+                console.error("Error fetching votes: ", error);
             });
-    }, []); // The empty array ensures this effect runs only once after the initial render
+    }, []);
 
     return (
         <div>
-            <h2>Movies</h2>
+            <h2>    {voter?.first_name}'s Movies</h2>
             {data.map((movie) => (
                 <MovieCard key={movie.id} movie={movie} />
 
