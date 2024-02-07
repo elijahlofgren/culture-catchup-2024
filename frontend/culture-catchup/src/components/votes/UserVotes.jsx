@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import MovieCard from '../common/MovieCard';
 
 function UserVotes() {
     const [data, setData] = useState([]);
@@ -26,11 +27,8 @@ function UserVotes() {
         <div>
             <h2>Movies</h2>
             {data.map((movie) => (
-                <div key={movie.id}>
-                    <h2>{movie.title}</h2>
-                    <a href={`https://www.imdb.com/title/${movie.imdb_id}`} target="noreferrer noopener _blank">View on IMBD</a>
+                <MovieCard key={movie.id} movie={movie} />
 
-                </div>
             ))}
         </div>
     );

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import MovieCard from '../common/MovieCard';
 
 function MovieList() {
     const [data, setData] = useState([]);
@@ -24,11 +25,7 @@ function MovieList() {
         <div>
             <h2>Movies</h2>
             {data.map((movie) => (
-                <div key={movie.id}>
-                    <h2>{movie.title}</h2>
-                    <a href={`https://www.imdb.com/title/${movie.imdb_id}`} target="noreferrer noopener _blank">View on IMBD</a>
-
-                </div>
+                <MovieCard key={movie.id} movie={movie} />
             ))}
         </div>
     );
