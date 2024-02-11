@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import MovieCard from '../common/MovieCard';
+import UserVotesMovieCard from './UserVotesMovieCard';
 
 function UserVotes() {
   const [voter, setVoter] = useState(null);
@@ -30,10 +30,19 @@ function UserVotes() {
 
   return (
     <div>
-      <h2>{voter?.first_name}'s Movies</h2>
-      {data.map((movie) => (
-        <MovieCard key={movie.id} movie={movie} />
-      ))}
+      <h2>{voter?.first_name}'s Upvoted Movies</h2>
+      {data
+        .filter((m) => m.up_vote)
+        .map((movie) => (
+          <UserVotesMovieCard key={movie.id} movie={movie} />
+        ))}
+
+      <h2>{voter?.first_name}'s Downvoted Movies</h2>
+      {data
+        .filter((m) => m.down_vote)
+        .map((movie) => (
+          <UserVotesMovieCard key={movie.id} movie={movie} />
+        ))}
     </div>
   );
 }

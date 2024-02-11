@@ -1,7 +1,8 @@
 import React from 'react';
-import './MovieCard.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import '../common/MovieCard.scss';
 
-function MovieCard(props) {
+function UserVotesMovieCard(props) {
   const { movie } = props;
 
   const handleCardClick = () => {
@@ -15,7 +16,20 @@ function MovieCard(props) {
         href={`/movies/${movie.id}`}
         target='_self'
       >
-        <h2 className='movie-title'>{movie.title}</h2>
+        <h2 className='movie-title'>
+          {movie.up_vote ? (
+            <>
+              <FontAwesomeIcon icon={['fa', 'thumbs-up']} />{' '}
+            </>
+          ) : null}
+          {movie.down_vote ? (
+            <>
+              <FontAwesomeIcon icon={['fa', 'thumbs-down']} />{' '}
+            </>
+          ) : null}
+
+          {movie.title}
+        </h2>
         <div className='movie-links'>
           <span>Movie Details</span>
           <a
@@ -33,4 +47,4 @@ function MovieCard(props) {
   );
 }
 
-export default MovieCard;
+export default UserVotesMovieCard;

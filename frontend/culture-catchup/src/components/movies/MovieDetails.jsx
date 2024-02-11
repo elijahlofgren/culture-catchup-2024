@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import MovieCard from '../common/MovieCard';
 import './MovieDetails.scss';
 
 function UserVotes() {
