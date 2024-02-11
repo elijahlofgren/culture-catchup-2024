@@ -7,7 +7,8 @@ module.exports = (knex) => {
       const rows = await knex('movies')
         .select(
           'movies.id',
-          'movies.title', // Assuming there's a 'title' column in your movies table
+          'movies.imdb_id',
+          'movies.title',
           knex.raw('SUM(votes.up_vote) AS upvotes'), // Sum of upvotes for each movie
           knex.raw('SUM(votes.down_vote) AS downvotes'), // Sum of downvotes for each movie
           knex.raw('COUNT(votes.id) AS total_votes'), // Total number of votes for each movie
