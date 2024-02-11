@@ -1,0 +1,38 @@
+.movie-card {
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 20px;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  cursor: pointer;
+
+  .movie-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .movie-card-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .movie-title {
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  .movie-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .imdb-link {
+    background-color: #f5c518;
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+}
