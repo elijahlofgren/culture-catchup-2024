@@ -31,7 +31,6 @@ function UserVotesMovieCard(props) {
           {movie.title}
         </h2>
         <div className='movie-links'>
-          <span>Movie Details</span>
           <a
             href={`https://www.imdb.com/title/${movie.imdb_id}`}
             target='_blank'

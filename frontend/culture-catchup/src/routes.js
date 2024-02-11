@@ -1,9 +1,14 @@
+import About from './components/about/About';
 import MovieList from './components/movies/MovieList';
 import MovieDetails from './components/movies/MovieDetails';
 import TopVoters from './components/voters/TopVoters';
 import UserVotes from './components/votes/UserVotes';
 
 const routes = [
+  {
+    path: '/about',
+    component: About,
+  },
   {
     path: '/movies',
     component: MovieList,

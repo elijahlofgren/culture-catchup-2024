@@ -26,6 +26,9 @@ function App() {
           <li>
             <Link to='/top-voters'>Top Voters</Link>
           </li>
+          <li>
+            <Link to='/about'>About</Link>
+          </li>
           {/* Add more links here if needed */}
         </ul>
       </nav>
