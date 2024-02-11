@@ -1,8 +1,8 @@
 // @ts-check
 
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const Joi = require("joi");
+const Joi = require('joi');
 
 // Define a schema
 const schema = Joi.object({
@@ -10,7 +10,7 @@ const schema = Joi.object({
 });
 
 module.exports = (knex) => {
-  router.get("/get-voter/:user_id", async (req, res) => {
+  router.get('/get-voter/:user_id', async (req, res) => {
     // Validate request parameters
     const { value: validatedParams, error } = schema.validate(req.params);
     if (error) {
@@ -19,19 +19,19 @@ module.exports = (knex) => {
     }
 
     try {
-      const user = await knex("users")
-        .select("first_name")
-        .where("id", validatedParams.user_id)
+      const user = await knex('users')
+        .select('first_name')
+        .where('id', validatedParams.user_id)
         .first();
 
       if (user) {
         res.json(user);
       } else {
-        res.status(404).send("User not found");
+        res.status(404).send('User not found');
       }
     } catch (error) {
-      console.error("Error executing query with Knex:", error);
-      res.status(500).send("Internal Server Error");
+      console.error('Error executing query with Knex:', error);
+      res.status(500).send('Internal Server Error');
     }
   });
 

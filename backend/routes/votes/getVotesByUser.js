@@ -1,6 +1,6 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const Joi = require("joi");
+const Joi = require('joi');
 
 // Define a schema
 const schema = Joi.object({
@@ -8,7 +8,7 @@ const schema = Joi.object({
 });
 
 module.exports = (knex) => {
-  router.get("/by-user/:user_id", async (req, res) => {
+  router.get('/by-user/:user_id', async (req, res) => {
     // Validate request parameters
     const { value: validatedParams, error } = schema.validate(req.params);
     if (error) {
@@ -17,16 +17,16 @@ module.exports = (knex) => {
     }
 
     try {
-      const rows = await knex("votes as v")
-        .select("m.id", "m.title", "v.up_vote", "v.down_vote", "u.first_name")
-        .leftJoin("users as u", "v.user_id", "u.id")
-        .leftJoin("movies as m", "v.movie_id", "m.id")
-        .where("u.id", validatedParams.user_id);
+      const rows = await knex('votes as v')
+        .select('m.id', 'm.title', 'v.up_vote', 'v.down_vote', 'u.first_name')
+        .leftJoin('users as u', 'v.user_id', 'u.id')
+        .leftJoin('movies as m', 'v.movie_id', 'm.id')
+        .where('u.id', validatedParams.user_id);
 
       res.json(rows);
     } catch (error) {
-      console.error("Error executing query:", error);
-      res.status(500).send("Internal Server Error");
+      console.error('Error executing query:', error);
+      res.status(500).send('Internal Server Error');
     }
   });
 

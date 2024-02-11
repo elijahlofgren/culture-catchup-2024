@@ -1,11 +1,11 @@
 // @ts-check
 
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const Joi = require("joi");
+const Joi = require('joi');
 const {
   getMovieDetailsByImdbId,
-} = require("../../lib/movie-db/getMovieDetailsByImdbId");
+} = require('../../lib/movie-db/getMovieDetailsByImdbId');
 
 // Define a schema
 const schema = Joi.object({
@@ -13,7 +13,7 @@ const schema = Joi.object({
 });
 
 module.exports = (knex) => {
-  router.get("/get-movie/:movie_id", async (req, res) => {
+  router.get('/get-movie/:movie_id', async (req, res) => {
     // Validate request parameters
     const { value: validatedParams, error } = schema.validate(req.params);
     if (error) {
@@ -27,11 +27,11 @@ module.exports = (knex) => {
       // Get the IMBD ID from the database
 
       // Example usage with an IMDb ID
-      const results = await getMovieDetailsByImdbId("tt1375666"); // Example IMDb ID for Inception
+      const results = await getMovieDetailsByImdbId('tt1375666'); // Example IMDb ID for Inception
       res.json(results);
     } catch (error) {
-      console.error("Error executing query:", error);
-      res.status(500).send("Internal Server Error");
+      console.error('Error executing query:', error);
+      res.status(500).send('Internal Server Error');
     }
   });
 
