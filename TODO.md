@@ -2,6 +2,10 @@
 
 ## Watch Party Planning
 
+## "Pods" - groups of people that may be friends etc
+
+- e.g. view movies most upvoted by your pod.
+
 ### Specific Reports
 
 - **Question**: I want a watch party with these 3 people, what are the top upvoted movies among just these 3 people?
