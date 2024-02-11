@@ -1,13 +1,11 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const getTopVoters = require('./getTopVoters');
-const getVoter = require('./getVoter');
+const getTopVoters = require("./getTopVoters");
+const getVoter = require("./getVoter");
 
-module.exports = (db) => {
+module.exports = (knex) => {
+  router.use("/", getTopVoters(knex));
+  router.use("/", getVoter(knex));
 
-    router.use('/', getTopVoters(db));
-    router.use('/', getVoter(db));
-
-    return router;
-
+  return router;
 };

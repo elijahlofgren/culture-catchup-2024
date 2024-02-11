@@ -1,14 +1,19 @@
+// @ts-check
+
 const express = require("express");
 const router = express.Router();
 const Joi = require("joi");
+const {
+  getMovieDetailsByImdbId,
+} = require("../../lib/movie-db/getMovieDetailsByImdbId");
 
 // Define a schema
 const schema = Joi.object({
-  user_id: Joi.number().integer().positive().required(),
+  movie_id: Joi.number().integer().positive().required(),
 });
 
 module.exports = (knex) => {
-  router.get("/by-user/:user_id", async (req, res) => {
+  router.get("/get-movie/:movie_id", async (req, res) => {
     // Validate request parameters
     const { value: validatedParams, error } = schema.validate(req.params);
     if (error) {
@@ -17,13 +22,13 @@ module.exports = (knex) => {
     }
 
     try {
-      const rows = await knex("votes as v")
-        .select("m.id", "m.title", "v.up_vote", "v.down_vote", "u.first_name")
-        .leftJoin("users as u", "v.user_id", "u.id")
-        .leftJoin("movies as m", "v.movie_id", "m.id")
-        .where("u.id", validatedParams.user_id);
+      // TODO: Cache movie details for up to 5 months (6 months is limit allowed)
 
-      res.json(rows);
+      // Get the IMBD ID from the database
+
+      // Example usage with an IMDb ID
+      const results = await getMovieDetailsByImdbId("tt1375666"); // Example IMDb ID for Inception
+      res.json(results);
     } catch (error) {
       console.error("Error executing query:", error);
       res.status(500).send("Internal Server Error");
