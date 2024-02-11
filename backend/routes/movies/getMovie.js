@@ -3,9 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const Joi = require('joi');
-const {
-  getMovieDetailsByImdbId,
-} = require('../../lib/movie-db/getMovieDetailsByImdbId');
+const getMovieDetails = require('../../lib/movie-db/getMovieDetails');
 
 // Define a schema
 const schema = Joi.object({
@@ -24,10 +22,12 @@ module.exports = (knex) => {
     try {
       // TODO: Cache movie details for up to 5 months (6 months is limit allowed)
 
-      // Get the IMBD ID from the database
+      const movie = await knex('movies')
+        .select('*')
+        .where('id', validatedParams.movie_id)
+        .first();
 
-      // Example usage with an IMDb ID
-      const results = await getMovieDetailsByImdbId('tt1375666'); // Example IMDb ID for Inception
+      const results = await getMovieDetails(movie.imdb_id);
       res.json(results);
     } catch (error) {
       console.error('Error executing query:', error);
