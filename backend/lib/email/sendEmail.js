@@ -1,6 +1,6 @@
 const { SESClient, SendEmailCommand } = require('@aws-sdk/client-ses');
 
-module.exports = async (email) => {
+module.exports = async (email, subject, bodyHtml) => {
   const sesClient = new SESClient({
     region: process.env.EMAIL_AWS_REGION,
     credentials: {
@@ -15,9 +15,12 @@ module.exports = async (email) => {
     },
     Message: {
       Body: {
-        Text: { Data: 'Hello from Node.js using AWS SES!' },
+        Html: {
+          Charset: 'UTF-8',
+          Data: bodyHtml,
+        },
       },
-      Subject: { Data: 'Test Email' },
+      Subject: { Data: subject },
     },
     Source: process.env.EMAIL_FROM_EMAIL_ADDRESS,
   };

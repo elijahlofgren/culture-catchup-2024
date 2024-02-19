@@ -22,7 +22,6 @@ module.exports = (knex) => {
       await sendLoginEmail(knex, res, validatedParams.email);
     } catch (error) {
       console.error('Error executing query with Knex:', error);
-      res.status(500).send('Internal Server Error');
     }
   });
 
