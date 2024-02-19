@@ -5,6 +5,7 @@ const Knex = require('knex');
 const movieRoutes = require('./routes/movies');
 const voterRoutes = require('./routes/voters');
 const votesRoutes = require('./routes/votes');
+const authRoutes = require('./routes/auth');
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger_output.json'); // Ensure this path matches the outputFile in step 2
 
@@ -28,6 +29,7 @@ app.use(cors());
 app.use('/movies', movieRoutes(knex));
 app.use('/voters', voterRoutes(knex));
 app.use('/votes', votesRoutes(knex));
+app.use('/auth', authRoutes(knex));
 
 // Swagger UI setup
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
