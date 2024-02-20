@@ -8,6 +8,7 @@ const votesRoutes = require('./routes/votes');
 const authRoutes = require('./routes/auth');
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger_output.json'); // Ensure this path matches the outputFile in step 2
+const verifyJwt = require('./middleware/verifyJwt');
 
 // Configure Knex
 const knex = Knex({
@@ -30,6 +31,13 @@ app.use('/movies', movieRoutes(knex));
 app.use('/voters', voterRoutes(knex));
 app.use('/votes', votesRoutes(knex));
 app.use('/auth', authRoutes(knex));
+
+app.get('/protected', verifyJwt, (req, res) => {
+  // Accessible only if the user has a valid JWT
+  res.send({
+    message: 'This is a protected route, accessible only with a valid JWT.',
+  });
+});
 
 // Swagger UI setup
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));

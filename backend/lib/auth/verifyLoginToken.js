@@ -14,7 +14,18 @@ module.exports = async (token) => {
       .where({ token: token })
       .update({ used: true });
 
-    return { valid: true, userId: tokenInfo.user_id };
+    // Generate a JWT for the user
+    const userJwt = jwt.sign(
+      {
+        userId: tokenInfo.user_id,
+      },
+      process.env.LOGIN_JWT_SECRET_KEY,
+      {
+        // Expires in 1 hour
+        expiresIn: '1h',
+      }
+    );
+    return { valid: true, userId: tokenInfo.user_id, jwt: userJwt };
   } else {
     return { valid: false };
   }
